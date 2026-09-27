@@ -1,0 +1,31 @@
+services:
+  scanner:
+    build: .
+    image: smart-document-scanner:latest
+    ports:
+      - "8000:8000"
+    volumes:
+      - scanner-data:/app/data
+      - scanner-outputs:/app/outputs
+      # Read-only so the batch CLI can be exercised against the real photographs without
+      # copying them into the image. The image itself never contains user documents.
+      - ./dataset:/samples:ro
+    environment:
+      MAX_UPLOAD_BYTES: "10485760"
+    healthcheck:
+      # Reports the live OCR engine rather than just "the process is up". A container that
+      # cannot load its recognition model is not healthy, and this is how that shows up
+      # before a user uploads anything.
+      test:
+        - CMD
+        - python
+        - -c
+        - "import urllib.request, json; d=json.load(urllib.request.urlopen('http://127.0.0.1:8000/api/health', timeout=5)); raise SystemExit(0 if d.get('ocr_engine_available') else 1)"
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+volumes:
+  scanner-data:
+  scanner-outputs:

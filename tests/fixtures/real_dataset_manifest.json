@@ -1,0 +1,192 @@
+{
+  "card_blank.jpg": {
+    "document_type": "business_card",
+    "scenarios": [
+      "blank_document",
+      "photo_background"
+    ],
+    "expected_tokens": [],
+    "minimum_token_hits": 0,
+    "expected_fields": []
+  },
+  "card_blurry.jpg": {
+    "document_type": "business_card",
+    "scenarios": [
+      "partial_blur",
+      "multiple_objects"
+    ],
+    "expected_tokens": [
+      "STANFORD",
+      "COMPUTER FORUM"
+    ],
+    "minimum_token_hits": 1,
+    "expected_fields": [
+      "name",
+      "company",
+      "title",
+      "email",
+      "phone"
+    ]
+  },
+  "card_extreme_noise.jpg": {
+    "document_type": "business_card",
+    "scenarios": [
+      "noisy_image"
+    ],
+    "expected_tokens": [
+      "STANFORD",
+      "ELECTRICAL",
+      "ENGINEERING",
+      "CHANDRASEKHAR"
+    ],
+    "minimum_token_hits": 1,
+    "expected_fields": [
+      "name",
+      "company",
+      "title",
+      "email",
+      "phone"
+    ]
+  },
+  "card_hitachi.jpg": {
+    "document_type": "business_card",
+    "scenarios": [
+      "rotated",
+      "multiple_objects"
+    ],
+    "expected_tokens": [
+      "HITACHI",
+      "INSPIRE",
+      "SYSTEMS",
+      "RESEARCH"
+    ],
+    "minimum_token_hits": 2,
+    "expected_fields": [
+      "name",
+      "company",
+      "title",
+      "email",
+      "phone"
+    ]
+  },
+  "card_lowlight.jpg": {
+    "document_type": "business_card",
+    "scenarios": [
+      "low_light"
+    ],
+    "expected_tokens": [
+      "STANFORD",
+      "COMPUTER FORUM",
+      "E-mail"
+    ],
+    "minimum_token_hits": 2,
+    "expected_fields": [
+      "name",
+      "company",
+      "title",
+      "email",
+      "phone"
+    ]
+  },
+  "card_on_desk.jpg": {
+    "document_type": "business_card",
+    "scenarios": [
+      "rotated",
+      "desk_background"
+    ],
+    "expected_tokens": [
+      "STANFORD",
+      "VIJAY",
+      "vijayc@stanford.edu"
+    ],
+    "minimum_token_hits": 2,
+    "expected_fields": [
+      "name",
+      "company",
+      "title",
+      "email",
+      "phone"
+    ]
+  },
+  "card_on_paper.jpg": {
+    "document_type": "business_card",
+    "scenarios": [
+      "multiple_objects",
+      "partial_shadow",
+      "textured_background"
+    ],
+    "expected_tokens": [
+      "STANFORD",
+      "MEDIA",
+      "MICROTEXT"
+    ],
+    "minimum_token_hits": 2,
+    "expected_fields": [
+      "name",
+      "company",
+      "title",
+      "email",
+      "phone"
+    ]
+  },
+  "card_partial_shadow.jpg": {
+    "document_type": "business_card",
+    "scenarios": [
+      "partial_shadow"
+    ],
+    "expected_tokens": [
+      "STANFORD",
+      "COMPUTER FORUM",
+      "TOMOKAZU"
+    ],
+    "minimum_token_hits": 2,
+    "expected_fields": [
+      "name",
+      "company",
+      "title",
+      "email",
+      "phone"
+    ]
+  },
+  "card_rotated.jpg": {
+    "document_type": "business_card",
+    "scenarios": [
+      "rotated",
+      "perspective_distortion"
+    ],
+    "expected_tokens": [
+      "STANFORD",
+      "ELECTRICAL",
+      "ENGINEERING"
+    ],
+    "minimum_token_hits": 2,
+    "expected_fields": [
+      "name",
+      "company",
+      "title",
+      "email",
+      "phone"
+    ]
+  },
+  "card_zoom.jpg": {
+    "document_type": "business_card",
+    "scenarios": [
+      "close_up",
+      "low_margin"
+    ],
+    "expected_tokens": [
+      "STANFORD",
+      "COMPUTER FORUM",
+      "350",
+      "Serra"
+    ],
+    "minimum_token_hits": 3,
+    "expected_fields": [
+      "name",
+      "company",
+      "title",
+      "email",
+      "phone"
+    ]
+  }
+}

@@ -1,0 +1,84 @@
+{
+  "card_blurry": {
+    "organization": "STANFORD COMPUTER FORUM",
+    "department": "Electrical Engineering",
+    "address": "350 Serra Mall, Packard Bldg, Rm 235, Stanford, CA 94305-9510",
+    "name": "TOMOKAZU MARAKAMI",
+    "title": "Visiting Scholar",
+    "phone": "1.650.725.7076",
+    "fax": "1.650.724.3648",
+    "email": "tmurakam@stanford.edu"
+  },
+  "card_extreme_noise": {
+    "organization": "STANFORD ELECTRICAL ENGINEERING",
+    "address": "17 Comstock Circle, Apt 101, Stanford, CA 94305",
+    "name": "VIJAY CHANDRASEKHAR",
+    "phone": "916.221.0411",
+    "email": "vijayc@stanford.edu"
+  },
+  "card_hitachi": {
+    "company": "Hitachi, Ltd.",
+    "division": "Intelligent Sensing Systems Unit, The Second Department of Systems Research",
+    "laboratory": "Hitachi Research Laboratory",
+    "name": "Hideaki Kido",
+    "address": "1-1, Omika-cho 7-chome, Hitachi-shi, Ibaraki-ken, 319-1292 Japan",
+    "tel": "81 294 52 5111 ex6086",
+    "fax": "81 294 52 7608",
+    "email": "hideaki.kido.fx@hitachi.com",
+    "website": "www.hitachi.co.jp/rd/hrl/"
+  },
+  "card_lowlight": {
+    "organization": "STANFORD COMPUTER FORUM",
+    "department": "Electrical Engineering",
+    "address": "350 Serra Mall, Packard Bldg, Rm 235, Stanford, CA 94305-9510",
+    "name": "TOMOKAZU MARAKAMI",
+    "title": "Visiting Scholar",
+    "phone": "1.650.725.7076",
+    "fax": "1.650.724.3648",
+    "email": "tmurakam@stanford.edu"
+  },
+  "card_on_desk": {
+    "organization": "STANFORD ELECTRICAL ENGINEERING",
+    "address": "17 Comstock Circle, Apt 101, Stanford, CA 94305",
+    "name": "VIJAY CHANDRASEKHAR",
+    "phone": "916.221.0411",
+    "email": "vijayc@stanford.edu"
+  },
+  "card_on_paper": {
+    "organization": "STANFORD",
+    "division": "MEDIA & MICROTEXT",
+    "institution": "Stanford University Libraries",
+    "address": "73 Green Library East, Stanford, CA 94305-6068",
+    "name": "JIM KENT",
+    "title": "Media Librarian",
+    "phone": "650.725.7263",
+    "email": "jimkent@stanford.edu"
+  },
+  "card_partial_shadow": {
+    "organization": "STANFORD COMPUTER FORUM",
+    "department": "Electrical Engineering",
+    "address": "350 Serra Mall, Packard Bldg, Rm 235, Stanford, CA 94305-9510",
+    "name": "TOMOKAZU MARAKAMI",
+    "title": "Visiting Scholar",
+    "phone": "1.650.725.7076",
+    "fax": "1.650.724.3648",
+    "email": "tmurakam@stanford.edu"
+  },
+  "card_rotated": {
+    "organization": "STANFORD ELECTRICAL ENGINEERING",
+    "address": "17 Comstock Circle, Apt 101, Stanford, CA 94305",
+    "name": "VIJAY CHANDRASEKHAR",
+    "phone": "916.221.0411",
+    "email": "vijayc@stanford.edu"
+  },
+  "card_zoom": {
+    "organization": "STANFORD COMPUTER FORUM",
+    "department": "Electrical Engineering",
+    "address": "350 Serra Mall, Packard Bldg, Rm 235, Stanford, CA 94305-9510",
+    "name": "TOMOKAZU MARAKAMI",
+    "title": "Visiting Scholar",
+    "phone": "1.650.725.7076",
+    "fax": "1.650.724.3648",
+    "email": "tmurakam@stanford.edu"
+  }
+}

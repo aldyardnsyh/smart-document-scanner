@@ -1,0 +1,40 @@
+# Tool caches at the repository root. The `**/` form below does not reliably match root
+# entries in Docker's pattern matching, and a cache directory that changes on every lint
+# run invalidates the build context, which is what makes repeated builds slow.
+.mypy_cache
+.ruff_cache
+.pytest_cache
+__pycache__
+**/__pycache__
+**/.mypy_cache
+**/.ruff_cache
+**/.pytest_cache
+
+.git
+.venv
+venv
+*.egg-info
+
+frontend/node_modules
+frontend/test-results
+frontend/playwright-report
+frontend/.next
+# `frontend/out` is deliberately NOT excluded. The canonical build compiles it inside the
+# image from the frontend stage, so nothing needs the host export.
+
+# `vendor` is deliberately NOT excluded either. It holds the one pinned source distribution
+# that PyPI no longer serves, without which the OCR engine cannot start. See requirements-ocr.txt.
+
+# The dataset is mounted at run time so the batch CLI can be exercised against real
+# photographs, and must never be baked into the image. Neither should the assignment
+# working documents, which are not part of the application.
+dataset
+data
+outputs
+BRIEF.md
+PRD*.md
+AUDIT_REPORT.md
+VALID_TEST_EXTRACTION.md
+
+*.log
+.env

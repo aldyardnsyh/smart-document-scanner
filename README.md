@@ -4,11 +4,29 @@ A document scanning pipeline that detects a card or document in a photograph, co
 perspective, enhances it for legibility, reads it with a neural OCR engine, and emits
 structured JSON with a confidence and provenance for every field.
 
+**Live demo:** <https://smart-document-scanner-production.up.railway.app/>
+
+The deployed instance runs the same `Dockerfile` as this repository, built by Railway from the
+committed source. The three ways to run it behave identically:
+
+| | How |
+| --- | --- |
+| Deployed | Open [the live demo](https://smart-document-scanner-production.up.railway.app/) and upload an image |
+| Docker | `docker build -t smart-document-scanner . && docker run -p 8000:8000 smart-document-scanner` |
+| Local | `uvicorn api:app --host 127.0.0.1 --port 8000`, or `python app.py --input ./dataset` for the CLI |
+
+See [Setup instructions](#setup-instructions) for the local prerequisites, and
+[Deployment](#deployment) for how the hosted instance is provisioned.
+
+Recognising one card takes roughly 45 seconds on CPU, because the engine reads four
+preprocessing variants and scores the best crop. The service itself responds immediately.
+
 ## Contents
 
 - [Stack](#stack)
 - [Setup instructions](#setup-instructions)
 - [Docker usage](#docker-usage)
+- [Deployment](#deployment)
 - [Example output](#example-output)
 - [Architecture overview](#architecture-overview)
 - [Algorithm explanation](#algorithm-explanation)
@@ -57,6 +75,9 @@ docker run -p 8000:8000 smart-document-scanner
 Open [http://localhost:8000](http://localhost:8000). The build compiles the C++ module, exports the frontend, and
 verifies that the OCR engine initialises. If the engine cannot load, the build fails rather than
 producing a container that accepts uploads it cannot read.
+
+The same image is what runs [the live demo](https://smart-document-scanner-production.up.railway.app/),
+so a local build and the deployed service behave identically.
 
 With Compose:
 
@@ -252,14 +273,25 @@ the interpreter, the dependencies, the compiled C++ module, and the built fronte
 
 ### API
 
-The same pipeline is exposed over HTTP. Start the server:
+The same pipeline is exposed over HTTP. Start a local server:
 
 ```bash
 uvicorn api:app --host 127.0.0.1 --port 8000
 ```
 
-It serves the REST API and the built frontend from one process, so [http://localhost:8000](http://localhost:8000) is
-the UI.
+The service serves the REST API and the built frontend from one process, so
+[http://localhost:8000](http://localhost:8000) is both the API root and the UI.
+
+The examples below use a local server. To call the deployed instance instead, set the base URL
+once and reuse it:
+
+```bash
+# local
+export BASE=http://127.0.0.1:8000
+
+# or the public deployment
+export BASE=https://smart-document-scanner-production.up.railway.app
+```
 
 **Check the service is ready**
 
@@ -797,11 +829,17 @@ which is why the held-out vocabulary tests run alongside it.
 4. **No table extraction.** Receipt line items and totals are parsed as fields, not as a table
    structure.
 5. **Single-page documents.** Multi-page PDFs are not supported.
-6. **No authentication or rate limiting.** Suitable for evaluation, not for public exposure.
-7. **Batch CLI is not failure-isolated.** One unreadable file aborts the run. The API isolates
+6. **No authentication or rate limiting.** The public demo accepts anonymous uploads and has no
+   quota, so it is an evaluation deployment and not something to point real traffic at. The
+   upload size is capped and the response body is validated, but there is no per-client limit.
+7. **Job history is in-memory and per instance.** Records live in the FastAPI process on
+   `/app/data`, so a redeploy clears them and history does not merge across instances. Mount a
+   volume at `/app/data` to keep it.
+8. **Batch CLI is not failure-isolated.** One unreadable file aborts the run. The API isolates
    failures per job.
-8. **Job history is local JSON** inside the FastAPI process, so it does not survive a restart and
-   does not work across multiple instances.
+9. **CPU-bound, so concurrent uploads queue.** The engine reads four variants per image on CPU.
+   Parallel uploads are handled one after another, and a burst of traffic will exhaust the
+   instance's CPU credit on a free tier.
 
 ---
 

@@ -56,4 +56,9 @@ RUN python -c "import onnxruntime, cv2, numpy; from src.ocr_engine import get_en
     && python scripts/check_dataset_leakage.py
 
 EXPOSE 8000
-CMD ["uvicorn", "api:app", "--host", "0.0.0.0", "--port", "8000"]
+
+# PaaS platforms (Railway, Fly.io, App Runner, Cloud Run) assign the listen port at
+# runtime through $PORT, and a hard-coded port makes the container unreachable behind
+# their proxy. The shell form is used so the variable expands; uvicorn is started as
+# exec so it receives signals and shuts down cleanly on deploy.
+CMD uvicorn api:app --host 0.0.0.0 --port ${PORT:-8000}

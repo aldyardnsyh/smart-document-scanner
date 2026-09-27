@@ -826,6 +826,46 @@ results for unchanged crops.
 
 ---
 
+## Deployment
+
+### Railway
+
+The repository includes a `railway.json`, so Railway needs no extra configuration: it detects
+the `Dockerfile`, builds the image, and serves the app. The app reads its listen port from the
+`PORT` environment variable that Railway assigns at runtime, so it works on any assigned port
+rather than a hard-coded one.
+
+1. Go to [railway.app](https://railway.app) and sign in with GitHub.
+2. Click **New Project → Deploy from GitHub repo**, and select this repository.
+3. Railway detects the Dockerfile and starts the build. No other fields need filling in.
+4. When the build finishes, open **Settings → Networking → Generate Domain** to get a public
+   URL. The app is then reachable at that URL, and the UI is served from the same origin.
+
+Railway calls `/api/health` as its health check. That endpoint reports the live OCR engine, not
+just process liveness, so a deployment that cannot load its model is marked unhealthy instead of
+being handed traffic.
+
+**Recognising an image takes roughly 45 seconds per card on a free-tier CPU**, so first
+processing after a cold start is slow. The service itself is responsive immediately; it is the
+OCR step that takes time.
+
+**Volume**: the pipeline writes per-job artefacts to `/app/outputs` and keeps job records in
+`/app/data`. On Railway these are on the container filesystem and are lost on redeploy. Add a
+Railway volume mounted at `/app/data` if you want history to survive. Image processing itself
+does not need persistence.
+
+**Limitations on a free tier**: this workload is CPU-bound and runs four OCR variants per image.
+A trial or hobby instance handles low traffic fine, but concurrent uploads will queue behind
+each other, and heavy use will run into the plan's resource limits.
+
+### Other platforms
+
+Because the container reads `PORT` and binds to `0.0.0.0`, it also deploys unchanged to Fly.io,
+Google Cloud Run, and AWS App Runner. For those, point the platform at the `Dockerfile` and set
+the health check path to `/api/health`.
+
+---
+
 ## Repository layout
 
 ```

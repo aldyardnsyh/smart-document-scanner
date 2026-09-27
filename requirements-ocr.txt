@@ -1,0 +1,30 @@
+﻿# OCR runtime for the recognition engine, installed with --no-deps.
+#
+# The engine is PP-OCR, distributed as the `rapidocr` package. Its declared dependencies
+# include `opencv-python`, the non-headless build, which links against libGL. This project
+# already depends on `opencv-python-headless`, and a headless container has no use for
+# libGL, so allowing the full dependency set would install a second, conflicting OpenCV and
+# break the import at runtime.
+#
+# The remaining runtime requirements (onnxruntime, shapely, pyclipper, Pillow, PyYAML,
+# omegaconf, colorlog, tqdm) are listed in requirements.txt and are installed with their own
+# dependencies. Only this file is installed with --no-deps.
+#
+# IMPORTANT â€” the antlr4 runtime is pinned by vendored source distribution
+# ------------------------------------------------------------------------
+# `rapidocr` configures itself through `omegaconf`, and `omegaconf 2.3.1` (the latest
+# release) requires `antlr4-python3-runtime==4.9.3` exactly. That version has been pulled
+# from PyPI, so a plain install resolves to 4.13.x instead, and the engine then dies at
+# import time with:
+#
+#     Could not deserialize ATN with version 3 (expected 4)
+#
+# There is no newer `omegaconf` to move to, so the fix is to install the exact runtime from
+# `vendor/antlr4-python3-runtime-4.9.3.tar.gz` (114 KB, pure Python, builds anywhere):
+#
+#     pip install --no-deps -r requirements-ocr.txt
+#     pip install vendor/antlr4-python3-runtime-4.9.3.tar.gz
+#
+# The Dockerfile does exactly this, in that order. If you change the `omegaconf` pin,
+# re-check which `antlr4-python3-runtime` it wants before dropping the vendored file.
+rapidocr>=2.0,<4

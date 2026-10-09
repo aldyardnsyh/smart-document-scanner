@@ -74,7 +74,10 @@ docker run -p 8000:8000 smart-document-scanner
 
 Open [http://localhost:8000](http://localhost:8000). The build compiles the C++ module, exports the frontend, and
 verifies that the OCR engine initialises. If the engine cannot load, the build fails rather than
-producing a container that accepts uploads it cannot read.
+producing a container that accepts uploads it cannot read. The native module is a mandatory part
+of the image: the container does not contain `g++`, so a binary that failed to compile cannot be
+rebuilt at run time, and the build stops there instead of silently demoting itself to the Python
+path.
 
 The same image is what runs [the live demo](https://smart-document-scanner-production.up.railway.app/),
 so a local build and the deployed service behave identically.
@@ -112,7 +115,21 @@ cd frontend && npm ci && npm run build
 ```
 
 The C++ accelerator is optional at run time. The pipeline falls back to the Python
-implementation and reports which one it used in `enhancement.accelerator`.
+implementation and reports which one it used in `enhancement.accelerator`, so a machine that
+cannot build the native module still runs the whole pipeline.
+
+On Windows the build step is the same source through CMake, and the output lands beside the
+Unix binary as `document_enhancer.exe`:
+
+```powershell
+cmake -S src/cpp_module -B build/cpp
+cmake --build build/cpp --config Release
+Copy-Item build/cpp/Release/document_enhancer.exe bin/document_enhancer.exe
+```
+
+`config.py` resolves the `.exe` suffix on Windows, so both paths report `accelerator: cpp` once
+the binary is present. The `g++` one-liner above remains the intended build on Linux, where the
+deployed image is produced.
 
 ### CLI
 

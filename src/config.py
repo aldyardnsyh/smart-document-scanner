@@ -9,7 +9,9 @@ OUTPUT_DIR = ROOT_DIR / "outputs"
 DEBUG_DIR = OUTPUT_DIR / "debug"
 PROCESSED_DIR = OUTPUT_DIR / "processed"
 FRONTEND_OUT_DIR = ROOT_DIR / "frontend" / "out"
-CPP_ENHANCER_PATH = ROOT_DIR / "bin" / "document_enhancer"
+CPP_ENHANCER_PATH = ROOT_DIR / "bin" / (
+    "document_enhancer.exe" if os.name == "nt" else "document_enhancer"
+)
 MAX_UPLOAD_BYTES = int(os.getenv("MAX_UPLOAD_BYTES", str(10 * 1024 * 1024)))
 ALLOWED_IMAGE_EXTENSIONS = {".jpg", ".jpeg", ".png", ".webp", ".bmp", ".tif", ".tiff"}
 DOCUMENT_TYPES = {"auto", "business_card", "id_card", "receipt", "paper_document"}

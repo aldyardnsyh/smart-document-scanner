@@ -4,18 +4,18 @@ A document scanning pipeline that detects a card or document in a photograph, co
 perspective, enhances it for legibility, reads it with a neural OCR engine, and emits
 structured JSON with a confidence and provenance for every field.
 
-**Live demo:** <https://smart-document-scanner-production.up.railway.app/>
+**Live demo:** <https://smart-document-scanner-indol.vercel.app/>
 
 > **Demo mode (Vercel):** the public site runs without the Python/OCR compute engine, so every
 > run shows a stored sample result instead of reading your file. Your upload never leaves the
 > browser. See [Demo mode](#demo-mode-vercel) below.
 
-The deployed instance runs the same `Dockerfile` as this repository, built by Railway from the
-committed source. The three ways to run it behave identically:
+The full pipeline — detection, perspective correction, native enhancement, and live OCR — runs
+from the committed source through the `Dockerfile`. The ways to run it:
 
 | | How |
 | --- | --- |
-| Deployed | Open [the live demo](https://smart-document-scanner-production.up.railway.app/) and upload an image |
+| Live demo (Vercel) | Open [smart-document-scanner-indol.vercel.app](https://smart-document-scanner-indol.vercel.app/) — demo mode, sample results, no backend |
 | Docker | `docker build -t smart-document-scanner . && docker run -p 8000:8000 smart-document-scanner` |
 | Local | `uvicorn api:app --host 127.0.0.1 --port 8000`, or `python app.py --input ./dataset` for the CLI |
 
@@ -51,13 +51,15 @@ preprocessing variants and scores the best crop. The service itself responds imm
 
 ## Demo mode (Vercel)
 
+**Live:** <https://smart-document-scanner-indol.vercel.app/>
+
 Vercel cannot run the Python/OpenCV/ONNX/C++ compute engine (no persistent server, no native
 binaries), so the Vercel deployment serves the same Next.js UI with `NEXT_PUBLIC_DEMO_MODE=1`:
 uploading a file runs the full 5-stage progress animation, then shows a stored sample result
-matching the selected document type — never a reading of your file. History ships with 6 seed
+matching the selected document type, never a reading of your file. History ships with 6 seed
 records (including 1 failure case) in `localStorage`; search, type/status filters, and delete
-with confirmation all work and persist across reloads. Deploy: `vercel.json` builds
-`frontend/` (`output: export` → `frontend/out`); no env vars required.
+with confirmation all work and persist across reloads. Deploy with Root Directory set to
+`frontend/`; `frontend/vercel.json` pins the framework so no build overrides are needed.
 
 | Page | Screenshot |
 | --- | --- |
@@ -116,8 +118,8 @@ of the image: the container does not contain `g++`, so a binary that failed to c
 rebuilt at run time, and the build stops there instead of silently demoting itself to the Python
 path.
 
-The same image is what runs [the live demo](https://smart-document-scanner-production.up.railway.app/),
-so a local build and the deployed service behave identically.
+The same image is what runs in the full pipeline deployment, so a local build and the
+container behave identically.
 
 With Compose:
 
@@ -343,8 +345,8 @@ once and reuse it:
 # local
 export BASE=http://127.0.0.1:8000
 
-# or the public deployment
-export BASE=https://smart-document-scanner-production.up.railway.app
+# or your own full-pipeline deployment
+export BASE=http://127.0.0.1:8000
 ```
 
 **Check the service is ready**

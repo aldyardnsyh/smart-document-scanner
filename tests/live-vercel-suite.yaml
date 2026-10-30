@@ -1,0 +1,14 @@
+name: live-vercel
+settings:
+  fail_fast: false
+  step_timeout: 20000
+steps:
+  - goto: {url: "https://smart-document-scanner-indol.vercel.app/"}
+  - wait_time: {seconds: 2}
+  - assert_text: {selector: "header", text: "Demo mode"}
+  - goto: {url: "https://smart-document-scanner-indol.vercel.app/history"}
+  - wait_time: {seconds: 2}
+  - assert_text: {selector: "body", text: "avery-lindgren-card.jpg"}
+  - goto: {url: "https://smart-document-scanner-indol.vercel.app/results?jobId=seed-01"}
+  - wait_time: {seconds: 2}
+  - assert_text: {selector: "body", text: "stored sample run"}

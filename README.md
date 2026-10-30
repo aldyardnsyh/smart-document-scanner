@@ -81,6 +81,8 @@ with confirmation all work and persist across reloads. Deploy: `vercel.json` bui
 
 ## Stack
 
+![Python](https://skillicons.dev/icons?i=py) ![C++](https://skillicons.dev/icons?i=cpp) ![TypeScript](https://skillicons.dev/icons?i=ts) ![Next.js](https://skillicons.dev/icons?i=nextjs) ![React](https://skillicons.dev/icons?i=react) ![FastAPI](https://skillicons.dev/icons?i=fastapi) ![Docker](https://skillicons.dev/icons?i=docker) ![Vercel](https://skillicons.dev/icons?i=vercel)
+
 | Layer         | Choice                                     |
 | ------------- | ------------------------------------------ |
 | Language      | Python 3.11                                |

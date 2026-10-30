@@ -1,7 +1,10 @@
+import * as demo from "./demo";
 import type { Job, ProcessOptions } from "./types";
 
-const API_BASE = process.env.NEXT_PUBLIC_API_BASE_URL
-  ?? (process.env.NODE_ENV === "development" ? "http://127.0.0.1:8000" : "");
+export const DEMO_MODE =
+  process.env.NEXT_PUBLIC_DEMO_MODE === "1" || !process.env.NEXT_PUBLIC_API_BASE_URL;
+
+const API_BASE = process.env.NEXT_PUBLIC_API_BASE_URL ?? "";
 
 export class ApiError extends Error {
   status: number;
@@ -22,7 +25,17 @@ async function request<T>(url: string, init?: RequestInit): Promise<T> {
   return (await response.json()) as T;
 }
 
+export interface HealthStatus {
+  status: string;
+  ocr_engine: string;
+  ocr_engine_available: boolean;
+  ocr_engine_error: string | null;
+  cpp_accelerator_available: boolean;
+}
+
 export function createProcess(file: File, options: ProcessOptions): Promise<Job> {
+  if (DEMO_MODE) return demo.createProcess(file, options);
+
   const form = new FormData();
   form.append("file", file);
   form.append("doc_type", options.documentType);
@@ -32,27 +45,25 @@ export function createProcess(file: File, options: ProcessOptions): Promise<Job>
 }
 
 export function getJob(jobId: string): Promise<Job> {
+  if (DEMO_MODE) return Promise.resolve().then(() => demo.getJob(jobId));
   return request<Job>(`/api/jobs/${encodeURIComponent(jobId)}`);
 }
 
 export function deleteJob(jobId: string): Promise<{ deleted: boolean }> {
+  if (DEMO_MODE) return Promise.resolve(demo.deleteJob(jobId));
   return request<{ deleted: boolean }>(`/api/jobs/${encodeURIComponent(jobId)}`, {
     method: "DELETE",
   });
 }
 
 export function getHistory(): Promise<Job[]> {
+  if (DEMO_MODE) return Promise.resolve(demo.history());
   return request<Job[]>("/api/history");
 }
 
-export function getHealth(): Promise<{
-  status: string;
-  ocr_engine: string;
-  ocr_engine_available: boolean;
-  ocr_engine_error: string | null;
-  cpp_accelerator_available: boolean;
-}> {
-  return request("/api/health");
+export function getHealth(): Promise<HealthStatus> {
+  if (DEMO_MODE) return Promise.resolve(demo.getHealth());
+  return request<HealthStatus>("/api/health");
 }
 
 export async function pollJob(
@@ -60,6 +71,17 @@ export async function pollJob(
   onUpdate: (job: Job) => void,
   signal?: AbortSignal,
 ): Promise<Job> {
+  if (DEMO_MODE) {
+    try {
+      return await demo.pollJob(jobId, onUpdate, signal);
+    } catch (error) {
+      if (error instanceof Error && error.name === "AbortError") {
+        demo.cancelJob(jobId);
+      }
+      throw error;
+    }
+  }
+
   while (true) {
     if (signal?.aborted) {
       throw new DOMException("Polling stopped", "AbortError");

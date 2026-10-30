@@ -1,0 +1,41 @@
+name: demo-run-flow
+settings:
+  fail_fast: false
+  step_timeout: 20000
+  run_timeout: 300
+steps:
+  - goto: {url: "http://127.0.0.1:3210/scanner"}
+  - assert_text: {selector: "body", text: "Your file stays in the browser"}
+  - evaluate: {js: "() => { const i = document.querySelector('input[type=\"file\"]'); const b = new Blob([new Uint8Array([137,80,78,71,13,10,26,10])], {type:'image/png'}); const f = new File([b], 'ktp-test.png', {type:'image/png'}); const d = new DataTransfer(); d.items.add(f); i.files = d.files; i.dispatchEvent(new Event('change', {bubbles:true})); return i.files.length; }"}
+  - assert_visible: {selector: "body", text: "ktp-test.png"}
+  - screenshot: {name: scanner-selected}
+  - click: {selector: "text=Process document"}
+  - wait_for: {selector: "text=Detecting document contour", timeout: 8000}
+  - screenshot: {name: scanner-progress}
+  - click: {selector: "text=Stop processing"}
+  - assert_visible: {selector: "body", text: "No active process"}
+  - goto: {url: "http://127.0.0.1:3210/history"}
+  - evaluate: {js: "() => document.body.innerText.includes('ktp-test.png') ? 'LEAKED' : 'CLEAN'"}
+  - assert_text: {selector: "body", text: "Processing history"}
+  - goto: {url: "http://127.0.0.1:3210/scanner"}
+  - evaluate: {js: "() => { const i = document.querySelector('input[type=\"file\"]'); const b = new Blob([new Uint8Array([137,80,78,71,13,10,26,10])], {type:'image/png'}); const f = new File([b], 'ktp-test.png', {type:'image/png'}); const d = new DataTransfer(); d.items.add(f); i.files = d.files; i.dispatchEvent(new Event('change', {bubbles:true})); return i.files.length; }"}
+  - click: {selector: "text=Process document"}
+  - wait_for: {selector: "text=Detecting document contour", timeout: 8000}
+  - wait_time: {seconds: 6000e-3}
+  - assert_url: {contains: "/results?jobId="}
+  - assert_text: {selector: "body", text: "stored sample run"}
+  - assert_text: {selector: "body", text: "BUDI SANTOSO"}
+  - screenshot: {name: results-run}
+  - click: {selector: "text=History"}
+  - assert_visible: {selector: "body", text: "ktp-test.png"}
+  - screenshot: {name: history-run}
+  - click: {selector: "article[data-job-id]:first-of-type button.history-card__delete"}
+  - click: {selector: ".delete-confirm button:has-text('Delete')"}
+  - wait_time: {seconds: 800e-3}
+  - goto: {url: "http://127.0.0.1:3210/history"}
+  - screenshot: {name: history-deleted}
+  - goto: {url: "http://127.0.0.1:3210/scanner"}
+  - evaluate: {js: "() => { const i = document.querySelector('input[type=\"file\"]'); const f = new File([new Uint8Array(11*1024*1024)], 'big.jpg', {type:'image/jpeg'}); const d = new DataTransfer(); d.items.add(f); i.files = d.files; i.dispatchEvent(new Event('change', {bubbles:true})); return i.files.length; }"}
+  - assert_visible: {selector: "body", text: "larger than 10 MB"}
+  - evaluate: {js: "() => { const i = document.querySelector('input[type=\"file\"]'); const f = new File(['x'], 'a.txt', {type:'text/plain'}); const d = new DataTransfer(); d.items.add(f); i.files = d.files; i.dispatchEvent(new Event('change', {bubbles:true})); return i.files.length; }"}
+  - assert_visible: {selector: "body", text: "supported image"}

@@ -1,0 +1,47 @@
+name: demo-qa
+settings:
+  fail_fast: false
+  step_timeout: 15000
+  run_timeout: 300
+steps:
+  - goto: {url: "http://127.0.0.1:3210/"}
+  - assert_text: {selector: "h1", text: "Turn an angled document photo into inspectable data."}
+  - wait_for: {selector: "header"}
+  - assert_text: {selector: "header", text: "Demo mode"}
+  - screenshot: {name: home-light}
+  - goto: {url: "http://127.0.0.1:3210/scanner"}
+  - assert_url: {contains: "/scanner"}
+  - screenshot: {name: scanner-empty}
+  - goto: {url: "http://127.0.0.1:3210/results?jobId=seed-01"}
+  - assert_text: {selector: "h1", text: "Processing results:"}
+  - click: {selector: "role=tab[name=\"Enhanced\"]"}
+  - screenshot: {name: results-success}
+  - goto: {url: "http://127.0.0.1:3210/results?jobId=seed-05"}
+  - assert_text: {selector: "body", text: "Document not detected"}
+  - screenshot: {name: results-failed}
+  - goto: {url: "http://127.0.0.1:3210/history"}
+  - assert_text: {selector: "body", text: "Processing history"}
+  - fill: {selector: "input[type=search]", text: "avery"}
+  - wait_time: {seconds: 0.6}
+  - assert_text: {selector: "body", text: "avery-lindgren-card.jpg"}
+  - fill: {selector: "input[type=search]", text: "zzz-no-match"}
+  - wait_time: {seconds: 0.6}
+  - assert_text: {selector: "body", text: "No matching records"}
+  - screenshot: {name: history}
+  - goto: {url: "http://127.0.0.1:3210/docs"}
+  - assert_text: {selector: "body", text: "How demo mode works"}
+  - screenshot: {name: docs}
+  - goto: {url: "http://127.0.0.1:3210/tidak-ada-rute"}
+  - assert_text: {selector: "body", text: "404"}
+  - screenshot: {name: notfound}
+  - viewport: {width: 390, height: 844}
+  - goto: {url: "http://127.0.0.1:3210/"}
+  - screenshot: {name: home-mobile}
+  - goto: {url: "http://127.0.0.1:3210/history"}
+  - screenshot: {name: history-mobile}
+  - viewport: {width: 1280, height: 800}
+  - goto: {url: "http://127.0.0.1:3210/results?jobId=seed-03"}
+  - screenshot: {name: results-idcard}
+  - goto: {url: "http://127.0.0.1:3210/"}
+  - click: {selector: "button[aria-label*=theme]"}
+  - screenshot: {name: home-dark}

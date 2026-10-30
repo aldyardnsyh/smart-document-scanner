@@ -6,7 +6,7 @@ import { CodeBlock } from "../components/CodeBlock";
 import { EmptyState } from "../components/EmptyState";
 import { ResultViewer } from "../components/ResultViewer";
 import { StatusBadge } from "../components/StatusBadge";
-import { getJob } from "../lib/api";
+import { DEMO_MODE, getJob } from "../lib/api";
 import type { Job } from "../lib/types";
 
 function formatDuration(milliseconds: number) {
@@ -66,6 +66,15 @@ export function ResultsPage({ jobId }: { jobId: string }) {
           </div>
           <StatusBadge status={job.status} />
         </div>
+        {DEMO_MODE ? (
+          <aside className="demo-banner" role="note">
+            <strong>Sample result</strong>
+            <p>
+              These artifacts come from a stored sample run, not from the file you selected.{" "}
+              <a href="/docs#demo">How the demo works</a>
+            </p>
+          </aside>
+        ) : null}
         <EmptyState
           action={<Link className="button button--primary" href="/scanner">Try another image</Link>}
           description={job.error?.message ?? "No document contour was detected in this image."}
@@ -94,6 +103,16 @@ export function ResultsPage({ jobId }: { jobId: string }) {
           <Link className="button button--secondary" href="/scanner">Process another</Link>
         </div>
       </div>
+
+      {DEMO_MODE ? (
+        <aside className="demo-banner" role="note">
+          <strong>Sample result</strong>
+          <p>
+            These artifacts come from a stored sample run, not from the file you selected.{" "}
+            <a href="/docs#demo">How the demo works</a>
+          </p>
+        </aside>
+      ) : null}
 
       <div className="results-layout">
         <div className="results-main">
@@ -161,7 +180,7 @@ export function ResultsPage({ jobId }: { jobId: string }) {
               <span>Detection</span>
               <strong>
                 {result.detection_selection === "primary"
-                  ? `${Math.round(result.detection_score * 100)}% contour`
+                  ? `${Math.round(Math.min(1, Math.max(0, result.detection_score)) * 100)}% contour`
                   : "OCR-validated"}
               </strong>
             </div>

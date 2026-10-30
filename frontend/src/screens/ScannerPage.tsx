@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { Icon } from "../components/Icon";
 import { JobProgress } from "../components/JobProgress";
-import { createProcess, pollJob } from "../lib/api";
+import { createProcess, DEMO_MODE, pollJob } from "../lib/api";
 import type { Job, ProcessOptions } from "../lib/types";
 
 const MAX_FILE_SIZE = 10 * 1024 * 1024;
@@ -242,6 +242,9 @@ export function ScannerPage() {
           </div>
 
           {error ? <div className="error-banner" role="alert"><Icon name="alert" size={18} /><span>{error}</span></div> : null}
+          {DEMO_MODE ? (
+            <p className="demo-note">Your file stays in the browser. Results come from a stored sample run.</p>
+          ) : null}
           <button className="button button--primary button--full" disabled={!file || submitting} onClick={processDocument} type="button">
             {submitting ? "Processing document" : "Process document"}
             {!submitting ? <Icon name="chevron" size={17} /> : null}

@@ -1,0 +1,719 @@
+[
+  {
+    "id": "seed-01",
+    "original_name": "avery-lindgren-card.jpg",
+    "status": "completed",
+    "stage": "parse",
+    "progress": 100,
+    "message": "Processing complete.",
+    "created_at": "2026-10-24T09:12:00Z",
+    "updated_at": "2026-10-24T09:12:00Z",
+    "result": {
+      "job_id": "seed-01",
+      "document_detected": true,
+      "rotation_angle": 3.08,
+      "detection_area_ratio": 0.6636,
+      "detection_method": "adaptive_inverted_contour",
+      "detection_score": 3.058,
+      "detection_selection": "primary",
+      "corners": [
+        [
+          143,
+          84
+        ],
+        [
+          1501,
+          157
+        ],
+        [
+          1456,
+          1014
+        ],
+        [
+          99,
+          943
+        ]
+      ],
+      "image_width": 1600,
+      "image_height": 1100,
+      "processing_time_ms": 20204.49,
+      "ocr_confidence": 0.9926,
+      "extracted_field_count": 6,
+      "recognised_field_count": 10,
+      "extraction_coverage": 0.6,
+      "fields": {
+        "document_type": "business_card",
+        "classification": {
+          "document_type": "business_card",
+          "score": 100.0,
+          "signals": [
+            "manual_override"
+          ]
+        },
+        "fields": [
+          {
+            "name": "address",
+            "value": "400 Harbor Street, Seattle, WA 98104",
+            "confidence": 0.99,
+            "source": "street_morphology",
+            "evidence": {
+              "tier": 3,
+              "support": 4,
+              "token_confidence": 0.796,
+              "agreement": 1.0
+            }
+          },
+          {
+            "name": "email",
+            "value": "avery@northline.exampl",
+            "confidence": 0.99,
+            "source": "email_shape",
+            "evidence": {
+              "tier": 1,
+              "support": 4,
+              "token_confidence": 0.794,
+              "agreement": 1.0
+            }
+          },
+          {
+            "name": "name",
+            "value": "AVERY LINDGREN",
+            "confidence": 0.99,
+            "source": "typographic_prominence",
+            "evidence": {
+              "tier": 4,
+              "support": 4,
+              "token_confidence": 0.798,
+              "agreement": 1.0
+            }
+          },
+          {
+            "name": "phone",
+            "value": "+1 555 0142",
+            "confidence": 0.99,
+            "source": "label:phone",
+            "evidence": {
+              "tier": 2,
+              "support": 4,
+              "token_confidence": 0.784,
+              "agreement": 1.0
+            }
+          },
+          {
+            "name": "title",
+            "value": "PRINCIPAL ENGINEER",
+            "confidence": 0.99,
+            "source": "job_title_morphology",
+            "evidence": {
+              "tier": 3,
+              "support": 4,
+              "token_confidence": 0.8,
+              "agreement": 1.0
+            }
+          },
+          {
+            "name": "fax",
+            "value": "+1555 0142 400",
+            "confidence": 0.847,
+            "source": "unlabelled_digit_run",
+            "evidence": {
+              "tier": 1,
+              "support": 1,
+              "token_confidence": 0.794,
+              "agreement": 0.5
+            }
+          }
+        ],
+        "structured": {},
+        "unclassified": [
+          {
+            "text": "NORTHLINE ANALYTICS",
+            "confidence": 0.55,
+            "reason": "no_field_rule_matched",
+            "tier": 2,
+            "label": null,
+            "inferred": true,
+            "line_count": 1
+          }
+        ]
+      },
+      "raw_text": "AVERY LINDGREN\nPRINCIPAL ENGINEER\nNORTHLINE ANALYTICS\nEmail: avery@northline.example\nPhone: +1555 0142\n400 Harbor Street, Seattle, WA 98104\nAVERY LINDGREN\nPRINCIPAL ENGINEER\nNORTHLINE ANALYTICS\nEmail: avery@northline.example\nPhone: +15550142\n400 Harbor Street, Seattle, WA 98104\nAVERY LINDGREN\nPRINCIPAL ENGINEER\nNORTHLINE ANALYTICS\nEmail: avery@northline.example\nPhone: +1 555 0142\n400 Harbor Street, Seattle, WA 98104\nAVERY LINDGREN\nPRINCIPAL ENGINEER\nNORTHLINE ANALYTICS\nEmail: avery@northline.example\nPhone: +1 555 0142\n400 Harbor Street, Seattle, WA 98104",
+      "ocr": {
+        "variant": "adaptive",
+        "evaluated_crops": 1,
+        "candidates": 1
+      },
+      "enhancement": {
+        "accelerator": "cpp",
+        "threshold": "adaptive_gaussian"
+      },
+      "warnings": [],
+      "assets": {
+        "original": "/demo/business_card/original.jpg",
+        "detected": "/demo/business_card/detected.jpg",
+        "corrected": "/demo/business_card/corrected.jpg",
+        "enhanced": "/demo/business_card/enhanced.jpg"
+      }
+    },
+    "error": null
+  },
+  {
+    "id": "seed-02",
+    "original_name": "harbor-cafe-receipt.jpg",
+    "status": "completed",
+    "stage": "parse",
+    "progress": 100,
+    "message": "Processing complete.",
+    "created_at": "2026-10-25T13:41:00Z",
+    "updated_at": "2026-10-25T13:41:00Z",
+    "result": {
+      "job_id": "seed-02",
+      "document_detected": true,
+      "rotation_angle": 3.12,
+      "detection_area_ratio": 0.6645,
+      "detection_method": "adaptive_inverted_contour",
+      "detection_score": 3.107,
+      "detection_selection": "primary",
+      "corners": [
+        [
+          144,
+          83
+        ],
+        [
+          1502,
+          157
+        ],
+        [
+          1455,
+          1015
+        ],
+        [
+          98,
+          943
+        ]
+      ],
+      "image_width": 1600,
+      "image_height": 1100,
+      "processing_time_ms": 21443.69,
+      "ocr_confidence": 0.993,
+      "extracted_field_count": 3,
+      "recognised_field_count": 12,
+      "extraction_coverage": 0.25,
+      "fields": {
+        "document_type": "receipt",
+        "classification": {
+          "document_type": "receipt",
+          "score": 100.0,
+          "signals": [
+            "manual_override"
+          ]
+        },
+        "fields": [
+          {
+            "name": "date",
+            "value": "12/03/2026",
+            "confidence": 0.99,
+            "source": "date_shape",
+            "evidence": {
+              "tier": 1,
+              "support": 4,
+              "token_confidence": 0.794,
+              "agreement": 1.0
+            }
+          },
+          {
+            "name": "ref_number",
+            "value": "INV-2026-0042",
+            "confidence": 0.99,
+            "source": "label:ref_number",
+            "evidence": {
+              "tier": 2,
+              "support": 4,
+              "token_confidence": 0.8,
+              "agreement": 1.0
+            }
+          },
+          {
+            "name": "total",
+            "value": "148.500",
+            "confidence": 0.99,
+            "source": "label:total",
+            "evidence": {
+              "tier": 2,
+              "support": 3,
+              "token_confidence": 0.798,
+              "agreement": 1.0
+            }
+          }
+        ],
+        "structured": {
+          "header": {
+            "ref_number": "INV-2026-0042",
+            "date": "12/03/2026"
+          },
+          "summary": {
+            "total": "148.500"
+          }
+        },
+        "unclassified": [
+          {
+            "text": "Espresso 32.000, Croissant 45.000, Sandwich 71.500",
+            "confidence": 0.55,
+            "reason": "no_field_rule_matched",
+            "tier": 4,
+            "label": null,
+            "inferred": true,
+            "line_count": 3
+          },
+          {
+            "text": "HARBOR CAFE, Merchant: HARBOR CAFE",
+            "confidence": 0.55,
+            "reason": "no_field_rule_matched",
+            "tier": 4,
+            "label": null,
+            "inferred": true,
+            "line_count": 2
+          },
+          {
+            "text": "Thank you",
+            "confidence": 0.55,
+            "reason": "no_field_rule_matched",
+            "tier": 2,
+            "label": null,
+            "inferred": true,
+            "line_count": 1
+          }
+        ]
+      },
+      "raw_text": "HARBOR CAFE\nMerchant: HARBOR CAFE\nRef: INV-2026-0042\nDate: 12/03/2026\nEspresso 32.000\nCroissant 45.000\nSandwich 71.500\nTOTAL 148.500\nThank you\nHARBOR CAFE\nMerchant: HARBOR CAFE\nRef: INV-2026-0042\nDate:12/03/2026\nEspresso 32.000\nCroissant 45.000\nSandwich 71.500\nTOTAL148.500\nThank you\nHARBOR CAFE\nMerchant: HARBOR CAFE\nRef: INV-2026-0042\nDate: 12/03/2026\nEspresso 32.000\nCroissant 45.000\nSandwich 71.500\nTOTAL 148.500\nThank you\nHARBOR CAFE\nMerchant: HARBOR CAFE\nRef: INV-2026-0042\nDate: 12/03/2026\nEspresso 32.000\nCroissant 45.000\nSandwich 71.500\nTOTAL 148.500\nThank you",
+      "ocr": {
+        "variant": "as_is",
+        "evaluated_crops": 1,
+        "candidates": 1
+      },
+      "enhancement": {
+        "accelerator": "cpp",
+        "threshold": "adaptive_gaussian"
+      },
+      "warnings": [],
+      "assets": {
+        "original": "/demo/receipt/original.jpg",
+        "detected": "/demo/receipt/detected.jpg",
+        "corrected": "/demo/receipt/corrected.jpg",
+        "enhanced": "/demo/receipt/enhanced.jpg"
+      }
+    },
+    "error": null
+  },
+  {
+    "id": "seed-03",
+    "original_name": "ktp-budi-santoso.jpg",
+    "status": "completed",
+    "stage": "parse",
+    "progress": 100,
+    "message": "Processing complete.",
+    "created_at": "2026-10-26T08:05:00Z",
+    "updated_at": "2026-10-26T08:05:00Z",
+    "result": {
+      "job_id": "seed-03",
+      "document_detected": true,
+      "rotation_angle": 2.06,
+      "detection_area_ratio": 0.6641,
+      "detection_method": "adaptive_inverted_contour",
+      "detection_score": 3.0861,
+      "detection_selection": "primary",
+      "corners": [
+        [
+          135,
+          96
+        ],
+        [
+          1495,
+          145
+        ],
+        [
+          1463,
+          1004
+        ],
+        [
+          105,
+          955
+        ]
+      ],
+      "image_width": 1600,
+      "image_height": 1100,
+      "processing_time_ms": 21065.47,
+      "ocr_confidence": 0.9856,
+      "extracted_field_count": 4,
+      "recognised_field_count": 17,
+      "extraction_coverage": 0.2353,
+      "fields": {
+        "document_type": "id_card",
+        "classification": {
+          "document_type": "id_card",
+          "score": 100.0,
+          "signals": [
+            "manual_override"
+          ]
+        },
+        "fields": [
+          {
+            "name": "nama",
+            "value": "BUDI SANTOSO",
+            "confidence": 0.99,
+            "source": "label:name+id_schema",
+            "evidence": {
+              "tier": 2,
+              "support": 4,
+              "token_confidence": 0.781,
+              "agreement": 1.0
+            }
+          },
+          {
+            "name": "nik",
+            "value": "0000000000000000",
+            "confidence": 0.99,
+            "source": "nik_shape",
+            "evidence": {
+              "tier": 1,
+              "support": 8,
+              "token_confidence": 0.788,
+              "agreement": 1.0
+            }
+          },
+          {
+            "name": "pekerjaan",
+            "value": "KARYAWAN SWASTA",
+            "confidence": 0.99,
+            "source": "label:pekerjaan",
+            "evidence": {
+              "tier": 2,
+              "support": 4,
+              "token_confidence": 0.795,
+              "agreement": 1.0
+            }
+          },
+          {
+            "name": "tempat_tgl_lahir",
+            "value": "25-07-1990",
+            "confidence": 0.99,
+            "source": "label:tempat_tgl_lahir",
+            "evidence": {
+              "tier": 2,
+              "support": 4,
+              "token_confidence": 0.8,
+              "agreement": 1.0
+            }
+          }
+        ],
+        "structured": {},
+        "unclassified": [
+          {
+            "text": "KARTU TANDA PENDUDUK",
+            "confidence": 0.55,
+            "reason": "no_field_rule_matched",
+            "tier": 1,
+            "label": null,
+            "inferred": true,
+            "line_count": 1
+          }
+        ]
+      },
+      "raw_text": "KARTU TANDA PENDUDUK\nNIK: 0000000000000000\nNama : BUDI SANTOSO\nTanggal Lahir: 25-07-1990\nGolongan Darah: O\nAlamat : JL. MERDEKA NO. 42, BANDUNG\nPekerjaan : KARYAWAN SWASTA\nKARTU TANDA PENDUDUK\nNIK:0000000000000000\nNama: BUDI SANTOSO\nTanggal Lahir: 25-07-1990\nGolongan Darah: O\nAlamat : JL. MERDEKA NO. 42, BANDUNG\nPekerjaan: KARYAWAN SWASTA\nKARTU TANDA PENDUDUK\nNIK:0000000000000000\nNama : BUDI SANTOSO\nTanggal Lahir: 25-07-1990\nGolongan Darah: O\nAlamat : JL. MERDEKA NO. 42, BANDUNG\nPekerjaan : KARYAWAN SWASTA\nKARTU TANDA PENDUDUK\nNIK : 0000000000000000\nNama : BUDI SANTOSO\nTanggal Lahir: 25-07-1990\nGolongan Darah: O\nAlamat : JL. MERDEKA NO. 42, BANDUNG\nPekerjaan : KARYAWAN SWASTA",
+      "ocr": {
+        "variant": "shadow_normalized",
+        "evaluated_crops": 1,
+        "candidates": 1
+      },
+      "enhancement": {
+        "accelerator": "cpp",
+        "threshold": "adaptive_gaussian"
+      },
+      "warnings": [],
+      "assets": {
+        "original": "/demo/id_card/original.jpg",
+        "detected": "/demo/id_card/detected.jpg",
+        "corrected": "/demo/id_card/corrected.jpg",
+        "enhanced": "/demo/id_card/enhanced.jpg"
+      }
+    },
+    "error": null
+  },
+  {
+    "id": "seed-04",
+    "original_name": "mou-northline-harbor.jpg",
+    "status": "completed",
+    "stage": "parse",
+    "progress": 100,
+    "message": "Processing complete.",
+    "created_at": "2026-10-27T16:22:00Z",
+    "updated_at": "2026-10-27T16:22:00Z",
+    "result": {
+      "job_id": "seed-04",
+      "document_detected": true,
+      "rotation_angle": 0.0,
+      "detection_area_ratio": 0.9985,
+      "detection_method": "full_frame_scan",
+      "detection_score": 1.3574,
+      "detection_selection": "primary",
+      "corners": [
+        [
+          0,
+          0
+        ],
+        [
+          1599,
+          0
+        ],
+        [
+          1599,
+          1099
+        ],
+        [
+          0,
+          1099
+        ]
+      ],
+      "image_width": 1600,
+      "image_height": 1100,
+      "processing_time_ms": 24470.22,
+      "ocr_confidence": 0.9946,
+      "extracted_field_count": 2,
+      "recognised_field_count": 12,
+      "extraction_coverage": 0.1667,
+      "fields": {
+        "document_type": "paper_document",
+        "classification": {
+          "document_type": "paper_document",
+          "score": 100.0,
+          "signals": [
+            "manual_override"
+          ]
+        },
+        "fields": [
+          {
+            "name": "document_type",
+            "value": "MEMORANDUM OF UNDERSTANDING",
+            "confidence": 0.62,
+            "source": "prominent_heading",
+            "evidence": {
+              "tier": 4,
+              "support": 1,
+              "token_confidence": 0.6,
+              "agreement": 0.5
+            }
+          },
+          {
+            "name": "date",
+            "value": "04 March 2026",
+            "confidence": 0.99,
+            "source": "date_shape",
+            "evidence": {
+              "tier": 1,
+              "support": 7,
+              "token_confidence": 0.796,
+              "agreement": 1.0
+            }
+          }
+        ],
+        "structured": {
+          "header": {
+            "voucher_date": "04 March 2026"
+          }
+        },
+        "unclassified": [
+          {
+            "text": "Document No. MOU-2026-117",
+            "confidence": 0.55,
+            "reason": "no_field_rule_matched",
+            "tier": 3,
+            "label": null,
+            "inferred": true,
+            "line_count": 1
+          },
+          {
+            "text": "This memorandum records the terms agreed between",
+            "confidence": 0.55,
+            "reason": "no_field_rule_matched",
+            "tier": 4,
+            "label": null,
+            "inferred": true,
+            "line_count": 1
+          },
+          {
+            "text": "Northline Analytics and Harbor Cafe for a twelve",
+            "confidence": 0.55,
+            "reason": "no_field_rule_matched",
+            "tier": 4,
+            "label": null,
+            "inferred": true,
+            "line_count": 1
+          },
+          {
+            "text": "month analytics engagement.",
+            "confidence": 0.55,
+            "reason": "no_field_rule_matched",
+            "tier": 3,
+            "label": null,
+            "inferred": true,
+            "line_count": 1
+          },
+          {
+            "text": "Both parties will review the scope every quarter.",
+            "confidence": 0.55,
+            "reason": "no_field_rule_matched",
+            "tier": 4,
+            "label": null,
+            "inferred": true,
+            "line_count": 1
+          }
+        ]
+      },
+      "raw_text": "MEMORANDUM OF UNDERSTANDING\nDocument No. MOU-2026-117\nDate: 04 March 2026\nThis memorandum records the terms agreed between\nNorthline Analytics and Harbor Cafe for a twelve\nmonth analytics engagement.\nBoth parties will review the scope every quarter.\nMEMORANDUM OF UNDERSTANDING\nDocument No. MOU-2026-117\nDate:04March 2026\nThis memorandum records the terms agreed between\nNorthline Analytics and Harbor Cafe for a twelve\nmonth analytics engagement.\nBoth parties will review the scope every quarter.\nMEMORANDUM OF UNDERSTANDING\nDocument No. MOU-2026-117\nDate: 04 March 2026\nThis memorandum records the terms agreed between\nNorthline Analytics and Harbor Cafe for a twelve\nmonth analytics engagement.\nBoth parties will review the scope every quarter.\nMEMORANDUM OF UNDERSTANDING\nDocument No. MOU-2026-117\nDate: 04 March 2026\nThis memorandum records the terms agreed between\nNorthline Analytics and Harbor Cafe for a twelve\nmonth analytics engagement.\nBoth parties will review the scope every quarter.",
+      "ocr": {
+        "variant": "as_is",
+        "evaluated_crops": 1,
+        "candidates": 1
+      },
+      "enhancement": {
+        "accelerator": "cpp",
+        "threshold": "adaptive_gaussian"
+      },
+      "warnings": [],
+      "assets": {
+        "original": "/demo/paper_document/original.jpg",
+        "detected": "/demo/paper_document/detected.jpg",
+        "corrected": "/demo/paper_document/corrected.jpg",
+        "enhanced": "/demo/paper_document/enhanced.jpg"
+      }
+    },
+    "error": null
+  },
+  {
+    "id": "seed-05",
+    "original_name": "blank-desk-photo.jpg",
+    "status": "failed",
+    "stage": "failed",
+    "progress": 100,
+    "message": "No document contour was found in this image.",
+    "created_at": "2026-10-27T10:03:00Z",
+    "updated_at": "2026-10-27T10:03:00Z",
+    "result": {
+      "job_id": "seed-05",
+      "document_detected": false,
+      "rotation_angle": 0.0,
+      "detection_area_ratio": 0.0,
+      "detection_method": "none",
+      "detection_score": 0.0,
+      "detection_selection": "none",
+      "corners": [],
+      "image_width": 0,
+      "image_height": 0,
+      "processing_time_ms": 0,
+      "ocr_confidence": 0.0,
+      "extracted_field_count": 0,
+      "recognised_field_count": 0,
+      "extraction_coverage": 0.0,
+      "fields": {
+        "document_type": "auto",
+        "classification": {
+          "document_type": "auto",
+          "score": 0.0,
+          "signals": []
+        },
+        "fields": [],
+        "unclassified": []
+      },
+      "raw_text": "",
+      "warnings": [
+        "No document contour was found in this image."
+      ],
+      "assets": {
+        "original": "/demo/no_document/original.jpg",
+        "detected": "/demo/no_document/original.jpg"
+      }
+    },
+    "error": {
+      "code": "no_document",
+      "message": "No document contour was found in this image."
+    }
+  },
+  {
+    "id": "seed-06",
+    "original_name": "blank-card.jpg",
+    "status": "completed",
+    "stage": "parse",
+    "progress": 100,
+    "message": "Processing complete.",
+    "created_at": "2026-10-28T11:47:00Z",
+    "updated_at": "2026-10-28T11:47:00Z",
+    "result": {
+      "job_id": "seed-06",
+      "document_detected": true,
+      "rotation_angle": 0.0,
+      "detection_area_ratio": 0.1744,
+      "detection_method": "canny_min_area_rect",
+      "detection_score": 3.0995,
+      "detection_selection": "primary",
+      "corners": [
+        [
+          172,
+          117
+        ],
+        [
+          427,
+          117
+        ],
+        [
+          427,
+          284
+        ],
+        [
+          172,
+          284
+        ]
+      ],
+      "image_width": 600,
+      "image_height": 407,
+      "processing_time_ms": 55600.23,
+      "ocr_confidence": 0,
+      "extracted_field_count": 0,
+      "recognised_field_count": 10,
+      "extraction_coverage": 0.0,
+      "fields": {
+        "document_type": "business_card",
+        "classification": {
+          "document_type": "business_card",
+          "score": 89.7,
+          "signals": [
+            "landscape_card_aspect",
+            "blank_landscape_card"
+          ]
+        },
+        "fields": [],
+        "structured": {},
+        "unclassified": []
+      },
+      "raw_text": "",
+      "ocr": {
+        "variant": "failed",
+        "evaluated_crops": 6,
+        "candidates": 6
+      },
+      "enhancement": {
+        "accelerator": "cpp",
+        "threshold": "adaptive_gaussian"
+      },
+      "warnings": [
+        "OCR engine returned no result"
+      ],
+      "assets": {
+        "original": "/demo/blank/original.jpg",
+        "detected": "/demo/blank/detected.jpg",
+        "corrected": "/demo/blank/corrected.jpg",
+        "enhanced": "/demo/blank/enhanced.jpg"
+      }
+    },
+    "error": null
+  }
+]

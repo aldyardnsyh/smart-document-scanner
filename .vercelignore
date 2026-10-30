@@ -1,0 +1,16 @@
+.venv/
+env/
+dataset/
+outputs/
+data/
+bin/
+build/
+tests/
+__pycache__/
+.pytest_cache/
+.ruff_cache/
+.vs/
+frontend/node_modules/
+frontend/.next/
+frontend/out/
+node_modules/

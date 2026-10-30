@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState, type ReactNode } from "react";
-import { getHealth } from "../lib/api";
+import { DEMO_MODE, getHealth } from "../lib/api";
 import { Icon } from "./Icon";
 import { Logo } from "./Logo";
 
@@ -16,7 +16,7 @@ const navigation = [
 export function AppShell({ children }: { children: ReactNode }) {
   const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
-  const [health, setHealth] = useState<"checking" | "online" | "offline">("checking");
+  const [health, setHealth] = useState<"checking" | "online" | "offline" | "demo">("checking");
   const [engine, setEngine] = useState<string | null>(null);
   const [theme, setTheme] = useState<"light" | "dark">("light");
 
@@ -33,6 +33,13 @@ export function AppShell({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     let active = true;
+    if (DEMO_MODE) {
+      setHealth("demo");
+      setEngine("PP-OCRv6 (sample)");
+      return () => {
+        active = false;
+      };
+    }
     getHealth()
       .then((report) => {
         if (!active) return;
@@ -86,9 +93,18 @@ export function AppShell({ children }: { children: ReactNode }) {
             <a href="/docs" target="_blank" rel="noreferrer">API Docs</a>
           </nav>
           <div className="topbar__utilities">
-            <span className={`api-status api-status--${health}`}>
+            <span
+              aria-label={health === "demo" ? "Demo mode: sample results" : undefined}
+              className={`api-status api-status--${health}`}
+            >
               <i />
-              {health === "checking" ? "Checking API" : health === "online" ? "FastAPI Online" : "API Offline"}
+              {health === "checking"
+                ? "Checking API"
+                : health === "online"
+                  ? "FastAPI Online"
+                  : health === "demo"
+                    ? "Demo mode"
+                    : "API Offline"}
             </span>
             <button
               aria-label={`Switch to ${theme === "light" ? "dark" : "light"} theme`}

@@ -1,0 +1,13 @@
+name: demo-debug-run
+settings:
+  fail_fast: false
+  step_timeout: 15000
+  run_timeout: 120
+steps:
+  - goto: {url: "http://127.0.0.1:3210/scanner"}
+  - evaluate: {js: "() => { const i = document.querySelector('input[type=\"file\"]'); const b = new Blob([new Uint8Array([137,80,78,71,13,10,26,10])], {type:'image/png'}); const f = new File([b], 'ktp-test.png', {type:'image/png'}); const d = new DataTransfer(); d.items.add(f); i.files = d.files; i.dispatchEvent(new Event('change', {bubbles:true})); return 'files=' + i.files.length; }"}
+  - assert_text: {text: "ktp-test.png"}
+  - click: {selector: "role=button[name=\"Process document\"]"}
+  - wait_time: {seconds: 6}
+  - evaluate: {js: "() => JSON.stringify({url: location.href, body: document.body.innerText.slice(0, 1500)})"}
+  - screenshot: {name: debug-run}

@@ -10,8 +10,6 @@ const stages = [
   { key: "parse", label: "Parse" },
 ];
 
-const CANCEL_AFTER_SECONDS = 25;
-
 function formatElapsed(totalSeconds: number): string {
   const minutes = Math.floor(totalSeconds / 60);
   const seconds = totalSeconds % 60;
@@ -95,9 +93,8 @@ export function JobProgress({ stage, progress, message, onCancel }: JobProgressP
         })}
       </ol>
 
-      {onCancel && !finished && elapsed >= CANCEL_AFTER_SECONDS ? (
+      {onCancel && !finished ? (
         <div className="job-progress__cancel">
-          <p>Heavy captures take longer because several readings are compared.</p>
           <button className="button button--secondary" onClick={onCancel} type="button">
             Stop processing
           </button>

@@ -60,7 +60,9 @@ yarn-error.log*
 Thumbs.db
 .idea/
 .vscode/
+.vs/
 *.swp
+bin/*.exe
 
 # ---------------------------------------------------------------------------
 # Deliberately NOT ignored. These are part of the deliverable and must be pushed:

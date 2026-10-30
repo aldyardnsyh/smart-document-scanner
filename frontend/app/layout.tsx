@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   title: "Smart Document Scanner",
   description: "Document detection, perspective correction, OCR, and structured extraction workbench.",
   icons: {
-    icon: "/brand/logo.png",
+    icon: "/favicon.ico",
   },
 };
 

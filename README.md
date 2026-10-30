@@ -6,6 +6,10 @@ structured JSON with a confidence and provenance for every field.
 
 **Live demo:** <https://smart-document-scanner-production.up.railway.app/>
 
+> **Demo mode (Vercel):** the public site runs without the Python/OCR compute engine, so every
+> run shows a stored sample result instead of reading your file. Your upload never leaves the
+> browser. See [Demo mode](#demo-mode-vercel) below.
+
 The deployed instance runs the same `Dockerfile` as this repository, built by Railway from the
 committed source. The three ways to run it behave identically:
 
@@ -23,6 +27,7 @@ preprocessing variants and scores the best crop. The service itself responds imm
 
 ## Contents
 
+- [Demo mode (Vercel)](#demo-mode-vercel)
 - [Stack](#stack)
 - [Setup instructions](#setup-instructions)
 - [Docker usage](#docker-usage)
@@ -41,6 +46,36 @@ preprocessing variants and scores the best crop. The service itself responds imm
 - [Known limitations](#known-limitations)
 - [Performance notes](#performance-notes)
 - [Repository layout](#repository-layout)
+
+---
+
+## Demo mode (Vercel)
+
+Vercel cannot run the Python/OpenCV/ONNX/C++ compute engine (no persistent server, no native
+binaries), so the Vercel deployment serves the same Next.js UI with `NEXT_PUBLIC_DEMO_MODE=1`:
+uploading a file runs the full 5-stage progress animation, then shows a stored sample result
+matching the selected document type — never a reading of your file. History ships with 6 seed
+records (including 1 failure case) in `localStorage`; search, type/status filters, and delete
+with confirmation all work and persist across reloads. Deploy: `vercel.json` builds
+`frontend/` (`output: export` → `frontend/out`); no env vars required.
+
+| Page | Screenshot |
+| --- | --- |
+| Landing (light) | ![Landing page, light theme](docs/screenshots/home-light.png) |
+| Landing (dark) | ![Landing page, dark theme](docs/screenshots/home-dark.png) |
+| Landing (mobile) | ![Landing page on mobile](docs/screenshots/home-mobile.png) |
+| Scanner, empty | ![Scanner page before upload](docs/screenshots/scanner-empty.png) |
+| Scanner, file selected | ![Scanner page with file selected](docs/screenshots/scanner-selected.png) |
+| Scanner, progress | ![Scanner progress stages](docs/screenshots/scanner-progress.png) |
+| Results, success | ![Results page with extracted fields](docs/screenshots/results-success.png) |
+| Results, live run | ![Results page after a demo run](docs/screenshots/results-run.png) |
+| Results, ID card | ![Results page for ID card sample](docs/screenshots/results-idcard.png) |
+| Results, failure | ![Results page for failed run](docs/screenshots/results-failed.png) |
+| History | ![History page with seed records](docs/screenshots/history.png) |
+| History, after run + delete | ![History after run and delete](docs/screenshots/history-run.png) |
+| History (mobile) | ![History page on mobile](docs/screenshots/history-mobile.png) |
+| API docs | ![API docs page](docs/screenshots/docs.png) |
+| 404 | ![Not-found page](docs/screenshots/notfound.png) |
 
 ---
 

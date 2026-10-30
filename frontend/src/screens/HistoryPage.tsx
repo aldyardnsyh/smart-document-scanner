@@ -4,7 +4,7 @@ import { useEffect, useMemo, useState } from "react";
 import { EmptyState } from "../components/EmptyState";
 import { HistoryCard } from "../components/HistoryCard";
 import { Icon } from "../components/Icon";
-import { getHistory } from "../lib/api";
+import { DEMO_MODE, getHistory } from "../lib/api";
 import type { Job } from "../lib/types";
 
 export function HistoryPage() {
@@ -55,6 +55,10 @@ export function HistoryPage() {
         </button>
       </div>
 
+      {DEMO_MODE ? (
+        <p className="demo-note">Sample records are loaded on first visit, so search, filters, and delete can be tried immediately.</p>
+      ) : null}
+
       <div className="filter-bar">
         <label className="search-field">
           <Icon name="search" size={17} />
@@ -102,7 +106,7 @@ export function HistoryPage() {
       ) : (
         <EmptyState
           action={<button className="button button--primary" onClick={() => setSearch("")} type="button">Clear filters</button>}
-          description={jobs.length ? "No records match the current filters." : "Process a document in the scanner and it will appear here automatically."}
+          description={jobs.length ? "No records match the current filters." : DEMO_MODE ? "No records. Reload the page to restore the sample set." : "Process a document in the scanner and it will appear here automatically."}
           title={jobs.length ? "No matching records" : "No documents processed yet"}
         />
       )}
